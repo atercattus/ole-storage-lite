@@ -1103,6 +1103,7 @@ sub _getBbdInfo($) {
     _setFilePos($iBdL, 0, $rhInfo);
     $rhInfo->{_FILEH_}->read($sWk, $rhInfo->{_BIG_BLOCK_SIZE});
     @aWk = unpack("V$iBdCnt", $sWk);
+    $iBdCnt = 100000 if $iBdCnt > 100000; # hotfix
     for($i=0;$i<$iBdCnt;$i++, $iBlkNo++) {
        if($aWk[$i] != ($iBlkNo+1)){
             $hBd{$iBlkNo} = $aWk[$i];
